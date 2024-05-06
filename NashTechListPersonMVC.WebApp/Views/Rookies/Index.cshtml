@@ -1,0 +1,86 @@
+﻿@model IEnumerable<NashTechListPersonMVC.Model.Models.Person>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>List Members</h1>
+        <div class="form-group">
+            
+            <select class="form-control" id="actionSelect" onchange="handleActionChange(this)">
+                <option value="">Choose an action</option>
+                <option value="@Url.Action("Index", "Rookies")">View All Members</option>
+                <option value="@Url.Action("DisplayOldestMember", "Rookies")">View Oldest Member</option>
+                <option value="@Url.Action("FilterMember", "Rookies", new { year = 2 })">Filter Members Born in 2000</option>
+                <option value="@Url.Action("FilterMember", "Rookies", new { year = 1 })">Filter Members Born Before 2000</option>
+                <option value="@Url.Action("FilterMember", "Rookies", new { year = 3 })">Filter Members Born After 2000</option>
+                <option value="showFullName">Show Members with Full Name</option>
+            </select>
+        </div>
+
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="hidden-column">First Name</th>
+                    <th class="hidden-column">Last Name</th>
+                    <th class="show-column" style="display: none;">Full Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Phone Number</th>
+                    <th>Birth Place</th>
+                    <th>Graduated</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var person in Model)
+                {
+                    <tr>
+                        <td class="hidden-column">@person.FirstName</td>
+                        <td class="hidden-column">@person.LastName</td>
+                        <td class="show-column" style="display: none;">@person.FullName</td>
+                        <td>@person.Age</td>
+                        <td>@person.Gender</td>
+                        <td>@person.DateOfBirth.ToShortDateString()</td>
+                        <td>@person.PhoneNumber</td>
+                        <td>@person.BirthPlace</td>
+                        <td>@(person.IsGraduated ? "Yes" : "No")</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="btn-group mb-5" role="group" aria-label="Action buttons">
+            <a class="btn btn-success" href="@Url.Action("ExportExcel", "Rookies")">Export to Excel</a>
+        </div>
+    </div>
+    <script>
+        function toggleResultAndAgeColumns() {
+            var showColumn = document.getElementsByClassName("show-column");
+            for (var i = 0; i < showColumn.length; i++) {
+                showColumn[i].style.display = "table-cell";
+            }
+
+            var hiddenColumn = document.getElementsByClassName("hidden-column");
+            for (var i = 0; i < hiddenColumn.length; i++) {
+                hiddenColumn[i].style.display = "none";
+            }
+        }
+
+        function handleActionChange(select) {
+            var selectedAction = select.value;
+            if (selectedAction === "showFullName") {
+                toggleResultAndAgeColumns();
+            } else if (selectedAction !== "") {
+                window.location.href = selectedAction;
+            }
+        }
+    </script>
+</body>
+</html>
