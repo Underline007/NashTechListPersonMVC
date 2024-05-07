@@ -113,7 +113,6 @@ namespace NashTechListPersonMVC.BusinessLogic.Repositories
             var person = ListPersonData.FirstOrDefault(p => p.Id == id);
             return Task.FromResult(person);
         }
-
         public bool Add(Person person)
         {
             try
@@ -161,9 +160,5 @@ namespace NashTechListPersonMVC.BusinessLogic.Repositories
         return true;
             
         }
-
-
-
-
     }
 }
