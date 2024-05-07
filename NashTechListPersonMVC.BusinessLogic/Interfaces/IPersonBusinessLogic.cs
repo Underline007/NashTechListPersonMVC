@@ -9,12 +9,15 @@ namespace NashTechListPersonMVC.BusinessLogic.Interfaces
 {
     public interface IPersonBusinessLogic
     {
-        public Task<IEnumerable<Person>> GetAllMember();
+        Task<IEnumerable<Person>> GetAllMember();
         public Task<IEnumerable<Person>> GetMaleMembers();
         public Task<IEnumerable<Person>> GetOldestMember();
-        public Task<IEnumerable<Person>> GetPersonListContainFullName();
-        public Task<IEnumerable<Person>> FilterPersonListByYear(int year);
+        public Task<IEnumerable<Person>> FilterPersonListByYear(string filler);
         Task<byte[]> ExportExcelFile();
-
+        Task<Person> GetByIdAsync(Guid id);
+        bool Add(Person person);
+        bool Update(Person person);
+        bool Delete(Person person);
+        
     }
 }

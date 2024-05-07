@@ -1,16 +1,12 @@
 ﻿using ClosedXML.Excel;
 using NashTechListPersonMVC.BusinessLogic.Interfaces;
 using NashTechListPersonMVC.Model.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NashTechListPersonMVC.BusinessLogic.Repositories
 {
     public class PersonBusinessLogicRepository : IPersonBusinessLogic
     {
+        
         private static List<Person> ListPersonData = new List<Person>
         {
 
@@ -81,20 +77,21 @@ namespace NashTechListPersonMVC.BusinessLogic.Repositories
                 return stream.ToArray();
             }
         }
-        public Task<IEnumerable<Person>> FilterPersonListByYear(int year)
+        public Task<IEnumerable<Person>> FilterPersonListByYear(string filter)
         {
             IEnumerable<Person> filteredList;
 
-            if (year == 1)
+            if (filter == "lessthan2000")
             {
                 filteredList = ListPersonData.Where(m => m.DateOfBirth.Year < 2000);
             }
-            else if (year == 2)
+            else if (filter == "equal2000")
             {
                 filteredList = ListPersonData.Where(m => m.DateOfBirth.Year == 2000);
             }
-            else if (year == 3)
-            {
+            else if (filter == "greaterthan2000")
+
+			{
                 filteredList = ListPersonData.Where(m => m.DateOfBirth.Year > 2000);
             }
             else
@@ -111,9 +108,62 @@ namespace NashTechListPersonMVC.BusinessLogic.Repositories
             return Task.FromResult<IEnumerable<Person>>(oldestMember);
         }
 
-        public Task<IEnumerable<Person>> GetPersonListContainFullName()
+        public Task<Person> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var person = ListPersonData.FirstOrDefault(p => p.Id == id);
+            return Task.FromResult(person);
         }
+
+        public bool Add(Person person)
+        {
+            try
+            {
+                person.Id = Guid.NewGuid();
+                ListPersonData.Add(person);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Update(Person person)
+        {
+            try
+            {
+                var existingPerson = ListPersonData.FirstOrDefault(p => p.Id == person.Id);
+
+                if (existingPerson == null)
+                {
+                    return false;
+                }
+
+                existingPerson.FirstName = person.FirstName;
+                existingPerson.LastName = person.LastName;
+                existingPerson.Gender = person.Gender;
+                existingPerson.DateOfBirth = person.DateOfBirth;
+                existingPerson.PhoneNumber = person.PhoneNumber;
+                existingPerson.BirthPlace = person.BirthPlace;
+                existingPerson.IsGraduated = person.IsGraduated;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool Delete(Person person)
+        {
+           
+        ListPersonData.Remove(person);
+        return true;
+            
+        }
+
+
+
+
     }
 }
