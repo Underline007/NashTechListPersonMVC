@@ -217,7 +217,7 @@ namespace NashTechListPersonMVC.WebApp.Areas.NashTech.Controllers
             return RedirectToAction("DeleteComfirm", new { deletedPersonName });
         }
 
-        public IActionResult DeleteComfirm(string deletedPerson)
+        public IActionResult DeleteConfirm(string deletedPerson)
         {
             ViewBag.DeletedPersonName = deletedPerson;
             return View();

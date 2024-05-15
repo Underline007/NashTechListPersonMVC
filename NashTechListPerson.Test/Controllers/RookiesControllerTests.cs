@@ -60,7 +60,6 @@ namespace NashTechListPersonMVC.Tests.Controllers
             Assert.Equal("Throw exception", viewResult.ViewData["ErrorMessage"]);
         }
 
-        // checkkkkkkkkkkkkkkkkkkkkkkkkkkkk
         [Fact]
         public async Task DisplayOldestMember_OldestMember_ReturnsViewWithOldestMember()
         {
@@ -117,13 +116,11 @@ namespace NashTechListPersonMVC.Tests.Controllers
         {
             // Arrange
             var maleMembers = new List<Person>
-        {
-            new Person { FirstName = "John",LastName="Jack", Gender = GenderType.Male },
-            new Person { FirstName = "David",LastName="Jack", Gender = GenderType.Male },
-            new Person { FirstName = "David",LastName="Jack", Gender = GenderType.Female }
-
-
-        };
+            {
+                new Person { FirstName = "John",LastName="Jack", Gender = GenderType.Male },
+                new Person { FirstName = "David",LastName="Jack", Gender = GenderType.Male },
+                new Person { FirstName = "David",LastName="Jack", Gender = GenderType.Female }
+            };
             _mockPersonBusinessLogic.Setup(bl => bl.GetMaleMembers()).ReturnsAsync(maleMembers);
 
             // Act
@@ -329,7 +326,7 @@ namespace NashTechListPersonMVC.Tests.Controllers
 
             var model = new PersonCreateEditViewModel
             {
-                FirstName = "Tran Upadte",
+                FirstName = "Tran Update",
                 LastName = "Dung Update",
                 Gender = GenderType.Male,
                 DateOfBirth = new DateTime(2002, 1, 1),
@@ -366,7 +363,7 @@ namespace NashTechListPersonMVC.Tests.Controllers
 
             var model = new PersonCreateEditViewModel
             {
-                FirstName = "Tran Upadte",
+                FirstName = "Tran Update",
                 LastName = "Dung Update",
                 Gender = GenderType.Male,
                 DateOfBirth = new DateTime(2002, 1, 1),

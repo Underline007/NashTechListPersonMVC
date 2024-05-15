@@ -12,18 +12,18 @@ namespace NashTechListPersonMVC.BusinessLogic.ViewModels
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage ="Firt Name is requied")]
+        [Required(ErrorMessage ="First Name is required")]
         [StringLength(30, ErrorMessage = "First name must be less than 30 characters")]
         public string FirstName { get; set; } = String.Empty;
 
-        [Required(ErrorMessage ="Last Name is requied")]
+        [Required(ErrorMessage = "Last Name is required")]
         [StringLength(30, ErrorMessage = "Last name must be less than 30 characters")]
         public string LastName { get; set; } = String.Empty;
         
         [Required(ErrorMessage = "Gender is required")]
         public GenderType Gender { get; set; }
 
-        [Required(ErrorMessage ="Last Name is requied")]
+        [Required(ErrorMessage = "Last Name is required")]
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
