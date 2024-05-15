@@ -44,6 +44,19 @@ namespace NashTechListPersonMVC.WebApp.Areas.NashTech.Controllers
             }
         }
 
+        public async Task<IActionResult> DisplayMaleMembers()
+        {
+            try
+            {
+                var maleMembers = await _personBusinessLogic.GetMaleMembers();
+                return View("Index", maleMembers);
+            }catch (Exception ex) 
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Error");
+            }
+        }
+
         public async Task<IActionResult> FilterMember(string filter)
         {
             try

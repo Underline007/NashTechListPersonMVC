@@ -7,7 +7,7 @@ namespace NashTechListPersonMVC.BusinessLogic.Repositories
     public class PersonBusinessLogicRepository : IPersonBusinessLogic
     {
         
-        private static List<Person> ListPersonData = new List<Person>
+        public static List<Person> ListPersonData = new List<Person>
         {
 
           new Person { Id = Guid.NewGuid(), FirstName = "John", LastName = "Doe1", Gender = GenderType.Male, DateOfBirth = new DateTime(1991, 1, 15), PhoneNumber = "1234567890", BirthPlace = "New York", IsGraduated = true },

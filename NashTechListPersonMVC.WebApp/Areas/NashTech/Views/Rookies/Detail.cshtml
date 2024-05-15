@@ -32,7 +32,7 @@
                 <dd class="col-sm-9">@Model.BirthPlace</dd>
 
                 <dt class="col-sm-3">Is Graduated:</dt>
-                <dd class="col-sm-9">@Model.IsGraduated</dd>
+                <dd class="col-sm-9">@(Model.IsGraduated ? "Yes" : "No")</dd>
             </dl>
             <div class="btn-group mt-3" role="group" aria-label="Action buttons">
                 <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
